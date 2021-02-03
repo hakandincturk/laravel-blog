@@ -16,6 +16,10 @@ use App\Http\Controllers\Front\HomepageController;
 
 Route::get('/', [HomepageController::class, 'index'])->name('homepage');
 Route::get('/sayfa', [HomepageController::class, 'index']);
+
+Route::get('/iletisim', [HomepageController::class, 'contact'])->name('contact');
+Route::post('/iletisim', [HomepageController::class, 'contactPost'])->name('contact.post');
+
 Route::get('/kategori/{category}', [HomepageController::class, 'category'])->name('category');
 Route::get('/{category}/{slug}', [HomepageController::class, 'single'])->name('single');
 Route::get('/{sayfa}', [HomepageController::class, 'page'])->name('page');
