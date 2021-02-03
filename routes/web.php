@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Back\DashboardController;
 use App\Http\Controllers\Front\HomepageController;
 
 /*
@@ -14,6 +15,24 @@ use App\Http\Controllers\Front\HomepageController;
 |
 */
 
+/*
+|--------------------------------------------------------------------------
+| Back Routes
+|--------------------------------------------------------------------------
+|
+*/
+
+Route::get('/admin/panel',  [DashboardController::class, 'index'])->name('admin.dashboard');
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Front Routes
+|--------------------------------------------------------------------------
+|
+*/
+
 Route::get('/', [HomepageController::class, 'index'])->name('homepage');
 Route::get('/sayfa', [HomepageController::class, 'index']);
 
@@ -23,3 +42,4 @@ Route::post('/iletisim', [HomepageController::class, 'contactPost'])->name('cont
 Route::get('/kategori/{category}', [HomepageController::class, 'category'])->name('category');
 Route::get('/{category}/{slug}', [HomepageController::class, 'single'])->name('single');
 Route::get('/{sayfa}', [HomepageController::class, 'page'])->name('page');
+
