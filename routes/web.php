@@ -22,11 +22,16 @@ use App\Http\Controllers\Front\HomepageController;
 |--------------------------------------------------------------------------
 |
 */
+Route::prefix('/admin')->name('admin.')->middleware('isLogin')->group(function(){
+    Route::get('/giris',  [AuthController::class, 'login'])->name('login');
+    Route::post('/giris',  [AuthController::class, 'loginPost'])->name('loginPost');
+});
 
-Route::get('/admin/panel',  [DashboardController::class, 'index'])->name('admin.dashboard');
-Route::get('/admin/giris',  [AuthController::class, 'login'])->name('admin.login');
-Route::post('/admin/giris',  [AuthController::class, 'loginPost'])->name('admin.loginPost');
-Route::get('/admin/cikis',  [AuthController::class, 'logout'])->name('admin.logout');
+
+Route::prefix('/admin')->name('admin.')->middleware('isAdmin')->group(function(){    
+    Route::get('/panel',  [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/cikis',  [AuthController::class, 'logout'])->name('logout');
+});
 
 
 
