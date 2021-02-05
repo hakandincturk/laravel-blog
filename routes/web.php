@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Back\AuthController;
 use App\Http\Controllers\Back\DashboardController;
 use App\Http\Controllers\Front\HomepageController;
 
@@ -23,6 +24,7 @@ use App\Http\Controllers\Front\HomepageController;
 */
 
 Route::get('/admin/panel',  [DashboardController::class, 'index'])->name('admin.dashboard');
+Route::get('/admin/giris',  [AuthController::class, 'login'])->name('admin.login');
 
 
 

@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Back;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class DashboardController extends Controller
+class AuthController extends Controller
 {
-    public function index()
+    public function login()
     {
-        return view('back.dashboard');
+        return view('back.auth.login');
     }
 }
