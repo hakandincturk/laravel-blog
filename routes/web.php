@@ -25,6 +25,8 @@ use App\Http\Controllers\Front\HomepageController;
 
 Route::get('/admin/panel',  [DashboardController::class, 'index'])->name('admin.dashboard');
 Route::get('/admin/giris',  [AuthController::class, 'login'])->name('admin.login');
+Route::post('/admin/giris',  [AuthController::class, 'loginPost'])->name('admin.loginPost');
+Route::get('/admin/cikis',  [AuthController::class, 'logout'])->name('admin.logout');
 
 
 

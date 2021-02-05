@@ -41,15 +41,16 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Hoş Geldiniz</h1>
                                     </div>
-                                    <form class="user">
+                                    <form class="user" method="POST" action="{{route('admin.loginPost')}}">
+                                        @csrf
                                         <div class="form-group">
                                             <input type="email" class="form-control form-control-user"
                                                 id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="Email Adresi...">
+                                                name="email" placeholder="Email Adresi...">
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="Şifre">
+                                                id="exampleInputPassword" name="password" placeholder="Şifre">
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
@@ -57,9 +58,10 @@
                                                 <label class="custom-control-label" for="customCheck">Beni Hatırla</label>
                                             </div>
                                         </div>
-                                        <a href="index.html" class="btn btn-primary btn-user btn-block">
+                                        @if ($errors->any()) <div class="alert alert-danger">{{$errors->first()}}</div> @endif
+                                        <button type="submit" class="btn btn-primary btn-user btn-block">
                                             Giriş
-                                        </a>
+                                        </button>
                                         <hr>
                                     </form>
                                 </div>
