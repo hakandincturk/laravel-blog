@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Back\AuthController;
+use App\Http\Controllers\Back\ArticleController;
 use App\Http\Controllers\Back\DashboardController;
 use App\Http\Controllers\Front\HomepageController;
 
@@ -30,6 +31,7 @@ Route::prefix('/admin')->name('admin.')->middleware('isLogin')->group(function()
 
 Route::prefix('/admin')->name('admin.')->middleware('isAdmin')->group(function(){    
     Route::get('/panel',  [DashboardController::class, 'index'])->name('dashboard');
+    Route::resource('/makaleler', ArticleController::class);
     Route::get('/cikis',  [AuthController::class, 'logout'])->name('logout');
 });
 
