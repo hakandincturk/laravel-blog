@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Back\AuthController;
 use App\Http\Controllers\Back\ArticleController;
 use App\Http\Controllers\Back\CategoryController;
+use App\Http\Controllers\Back\ConfigController;
 use App\Http\Controllers\Back\DashboardController;
 use App\Http\Controllers\Back\PageController;
 
@@ -23,6 +24,10 @@ use App\Http\Controllers\Front\HomepageController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/aktif-degil', function(){
+    return view('front.offline');
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -64,6 +69,10 @@ Route::prefix('/admin')->name('admin.')->middleware('isAdmin')->group(function()
     Route::get('/sayfalar/sil/{id}', [PageController::class, 'delete'])->name('pages.delete');
     Route::get('/sayfalar/orders', [PageController::class, 'orders'])->name('pages.orders');
     Route::get('/page/switch',  [PageController::class, 'statusSwitch'])->name('pages.switch');
+
+    //Configs Routes
+    Route::get('/ayarlar', [ConfigController::class, 'index'])->name('config.index');
+    Route::post('/ayarlar/guncelle', [ConfigController::class, 'update'])->name('config.update');
 
     Route::get('/cikis',  [AuthController::class, 'logout'])->name('logout');
 });

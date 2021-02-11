@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Mail;
 
 use Validator;
 
@@ -11,6 +12,7 @@ use Validator;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\Contact;
+use App\Models\Config;
 use App\Models\Page;
 
 class HomepageController extends Controller
@@ -19,6 +21,11 @@ class HomepageController extends Controller
     public function __construct()
     {   //bütün fonksiyonlarda kullanılan değişkenleri kod tekrarını azaltmak için 
         //construct metodunda aşağıda ki gibi tanımlanabilir.
+
+        if(Config::find(1)->active == 0){
+            return redirect()->to('aktif-degil')->send();
+        }
+
         view()->share('pages', Page::orderBy('order', 'ASC')->get());
         view()->share('categories', Category::inRandomOrder()->get());
     }
@@ -81,6 +88,19 @@ class HomepageController extends Controller
         $contact->topic = $request->topic;
         $contact->message = $request->message;
         $contact->save();
+
+        Mail::raw('Mesajınız alındı. Teşekkürler.
+                   Mesaj Gönderen: '.$request->name.'<br/>
+                   Mesaj Gönderen Mail: '.$request->email.'<br/>
+                   Mesaj Konusu: '.$request->topic.'<br/>
+                   Mesaj: '.$request->message.'<br/>
+                   Mesaj Gönderilme Tarihi: '.$request->created_at.'
+        ', function($message) use($request){
+            $message->from('iletisim@blogsitesi.com', 'Blog Sitesi');
+            $message->to('allstarg4m3@gmail.com');
+            $message->subject($request->name.' kişisi iletişimden mesaj gönderdi.');
+        });
+
         return redirect()->route('contact')->with('success', 'İletiniz başarılı bir şekilde alındı. Teşekkürler.');
     }
 }

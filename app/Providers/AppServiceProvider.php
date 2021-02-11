@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;
+use App\Models\Config;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,6 +25,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        view()->share('config', Config::find(1));
         Route::resourceVerbs([
             'create' => 'olustur',
             'edit' => 'guncelle'

@@ -7,32 +7,24 @@
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <ul class="list-inline text-center">
-            <li class="list-inline-item">
-              <a href="#">
-                <span class="fa-stack fa-lg">
-                  <i class="fas fa-circle fa-stack-2x"></i>
-                  <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
-                </span>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="#">
-                <span class="fa-stack fa-lg">
-                  <i class="fas fa-circle fa-stack-2x"></i>
-                  <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
-                </span>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="#">
-                <span class="fa-stack fa-lg">
-                  <i class="fas fa-circle fa-stack-2x"></i>
-                  <i class="fab fa-github fa-stack-1x fa-inverse"></i>
-                </span>
-              </a>
-            </li>
+            @php
+                $socials = ['facebook', 'twitter', 'github', 'linkedin', 'youtube', 'instagram'];
+            @endphp
+
+            @foreach ($socials as $social)
+              @if ($config->$social != null)
+                <li class="list-inline-item">
+                  <a target="_blank" href="{{$config->$social}}">
+                    <span class="fa-stack fa-lg">
+                      <i class="fas fa-circle fa-stack-2x"></i>
+                      <i class="fab fa-{{$social}} fa-stack-1x fa-inverse"></i>
+                    </span>
+                  </a>
+                </li>
+              @endif
+            @endforeach
           </ul>
-          <p class="copyright text-muted">Copyright &copy; Your Website 2020</p>
+          <p class="copyright text-muted">Copyright &copy; {{$config->title}} {{date('Y')}}</p>
         </div>
       </div>
     </div>
