@@ -143,9 +143,9 @@ class ArticleController extends Controller
         $article = Article::onlyTrashed($id);
         if (File::exists($article->image)) {
             File::delete(public_path($article->image));
-            $article->forceDelete();
             toastr()->success('Makale başarılı bir şekilde yok edildi.');
         }
+        $article->forceDelete();
         return redirect()->route('admin.makaleler.trashed');
     }
 

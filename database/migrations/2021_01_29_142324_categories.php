@@ -17,6 +17,7 @@ class Categories extends Migration
             $table->id()->unsigned();
             $table->string('name');
             $table->string('slug');
+            $table->integer('status')->default(1);
             $table->timestamps();
         });
     }
