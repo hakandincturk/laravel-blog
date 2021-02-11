@@ -157,6 +157,7 @@ return [
     'attributes' => [
         'name' => 'Ad Soyad',
         'message' => 'Mesaj',
+        'title' => 'Başlık'
     ],
 
 ];

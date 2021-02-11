@@ -175,6 +175,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        //Custom Packges
+        Yoeunes\Toastr\ToastrServiceProvider::class,
+
     ],
 
     /*
